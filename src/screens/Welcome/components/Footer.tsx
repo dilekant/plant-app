@@ -1,6 +1,6 @@
 import { useTheme } from 'styled-components/native';
 
-import { FooterTextContainer } from '../styles';
+import { FooterTextContainer } from './styles';
 
 import { Text } from '@/components';
 
@@ -32,4 +32,4 @@ const Footer = () => {
   );
 };
 
-export { Footer };
+export default Footer;
