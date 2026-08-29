@@ -39,6 +39,6 @@ export const ButtonContainer = styled.View<{ insetBottom: number }>`
     right: 0,
     paddingHorizontal: normalizeSize(24),
     paddingBottom: insetBottom + normalizeSize(16),
-    backgroundColor: colors.background,
+    backgroundColor: colors.transparent,
   })}
 `;

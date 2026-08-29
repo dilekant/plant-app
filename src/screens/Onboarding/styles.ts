@@ -1,82 +1,102 @@
 import styled from 'styled-components/native';
 
-export const Container = styled.View`
-  ${({ theme: { normalizeSize, colors } }) => ({
-    flex: 1,
-    backgroundColor: colors.surface,
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    paddingHorizontal: normalizeSize(20),
-    paddingVertical: normalizeSize(40),
-  })}
-`;
-
-export const Content = styled.View`
-  flex: 1;
-  justify-content: center;
-  align-items: center;
-`;
-
-export const Title = styled.Text`
-  ${({ theme: { normalizeSize, colors } }) => ({
-    fontSize: normalizeSize(32),
-    fontWeight: 'bold',
-    marginBottom: normalizeSize(16),
-    textAlign: 'center',
-    color: colors.primaryText,
-  })}
-`;
-
-export const Description = styled.Text`
-  ${({ theme: { normalizeSize, colors } }) => ({
-    fontSize: normalizeSize(16),
-    color: colors.secondaryText,
-    textAlign: 'center',
-    lineHeight: normalizeSize(24),
-  })}
-`;
-
-export const ButtonContainer = styled.View`
+export const HeaderTextContainer = styled.View`
   ${({ theme: { normalizeSize } }) => ({
-    width: '100%',
-    flexDirection: 'row',
-    gap: normalizeSize(12),
+    paddingHorizontal: normalizeSize(24),
+  })}
+`;
+
+export const CarouselPage = styled.View<{ width: number }>`
+  ${({ width }) => ({ width, flex: 1 })}
+`;
+
+export const PaginationContainer = styled.View`
+  ${({ theme: { normalizeSize } }) => ({
+    marginTop: normalizeSize(32.5),
+  })}
+`;
+
+export const ContentContainer = styled.View<{ insetTop: number }>`
+  ${({ insetTop, theme: { normalizeSize } }) => ({
+    top: insetTop + normalizeSize(200),
+  })}
+`;
+
+export const TextContainer = styled.View`
+  ${({ theme: { normalizeSize } }) => ({
+    paddingHorizontal: normalizeSize(24),
     marginBottom: normalizeSize(20),
   })}
 `;
 
-export const Button = styled.TouchableOpacity`
+export const FeaturesContainer = styled.ScrollView`
+  ${({ theme: { normalizeSize } }) => ({
+    marginLeft: normalizeSize(24),
+    marginBottom: normalizeSize(24),
+  })}
+`;
+export const FeaturesContentContainer = styled.View`
   ${({ theme: { normalizeSize, colors } }) => ({
-    flex: 1,
-    paddingVertical: normalizeSize(14),
+    marginRight: normalizeSize(8),
+    borderRadius: normalizeSize(14),
+    padding: normalizeSize(16),
+    width: normalizeSize(156),
+    height: normalizeSize(130),
+    // backgroundColor: 'blue',
+    justifyContent: 'space-between',
+    backgroundColor: colors.blur,
+  })}
+`;
+
+export const PlanDiscountContainer = styled.View`
+  ${({ theme: { normalizeSize, colors } }) => ({
+    paddingLeft: normalizeSize(12),
+    paddingVertical: normalizeSize(4),
+    paddingRight: normalizeSize(9),
+    position: 'absolute',
+    top: 0,
+    right: 0,
+    borderTopRightRadius: normalizeSize(14),
+    borderBottomLeftRadius: normalizeSize(20),
     backgroundColor: colors.primary,
-    borderRadius: normalizeSize(8),
+    justifyContent: 'center',
+  })}
+`;
+
+export const PlansContainer = styled.TouchableOpacity<{
+  isSelected: boolean;
+  isDiscount?: boolean;
+}>`
+  ${({ isSelected, isDiscount, theme: { normalizeSize, colors } }) => ({
+    marginBottom: normalizeSize(16),
+    borderRadius: normalizeSize(isSelected && isDiscount ? 20 : 14),
+    paddingHorizontal: normalizeSize(16),
+    paddingVertical: normalizeSize(13),
     alignItems: 'center',
+    flexDirection: 'row',
+    backgroundColor: colors.blur,
+    borderWidth: isSelected ? 1.5 : 0.5,
+    borderColor: isSelected ? colors.primary : colors.whiteOpacity30,
+    gap: normalizeSize(12),
   })}
 `;
 
-export const ButtonText = styled.Text`
-  ${({ theme: { normalizeSize, colors } }) => ({
-    fontSize: normalizeSize(16),
-    fontWeight: '600',
-    color: colors.white,
-  })}
-`;
-
-export const SecondaryButton = styled.TouchableOpacity`
-  ${({ theme: { normalizeSize, colors } }) => ({
-    flex: 1,
-    paddingVertical: normalizeSize(14),
-    backgroundColor: colors.border,
-    borderRadius: normalizeSize(8),
+export const PlansSelectedCircleContainer = styled.View<{ isSelected: boolean }>`
+  ${({ isSelected, theme: { normalizeSize, colors } }) => ({
+    width: normalizeSize(24),
+    height: normalizeSize(24),
+    backgroundColor: isSelected ? colors.primary : colors.whiteOpacity15,
+    borderRadius: normalizeSize(24),
     alignItems: 'center',
+    justifyContent: 'center',
   })}
 `;
 
-export const SecondaryButtonText = styled.Text`
+export const PlansSelectedCircle = styled.View`
   ${({ theme: { normalizeSize, colors } }) => ({
-    fontSize: normalizeSize(16),
-    fontWeight: '600',
-    color: colors.text,
+    width: normalizeSize(6),
+    height: normalizeSize(6),
+    backgroundColor: colors.white,
+    borderRadius: normalizeSize(3),
   })}
 `;

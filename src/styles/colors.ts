@@ -1,9 +1,17 @@
 export const colors = {
   primary: '#28AF6E',
+  primaryBackground: '#101E17',
   primaryText: '#000000',
   background: '#ffffff',
   primaryOpacity: 'rgba(89, 113, 101, 0.7)',
   white: '#fff',
+  mainText: '#13231B',
+  grayOpacity: '#13231B40',
+  transparent: 'transparent',
+  blur: 'rgba(255,255,255,0.16)',
+  whiteOpacity15: 'rgba(255, 255, 255, 0.15)',
+  whiteOpacity30: 'rgba(255, 255, 255, 0.3)',
+  whiteOpacity52: 'rgba(255, 255, 255, 0.52)',
 
   surface: '#fff',
   blue: '#2196F3',

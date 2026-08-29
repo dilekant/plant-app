@@ -3,7 +3,7 @@ import React from 'react';
 import { ActivityIndicator, ViewProps } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
-import { useTheme } from '../../styles/useTheme';
+import { useTheme } from '../../styles';
 import { Button } from '../button';
 
 import {
@@ -27,6 +27,7 @@ interface ScreenProps extends Omit<ViewProps, 'children'> {
   footerComponent?: React.ReactNode;
   scrollable?: boolean;
   loadingIndicatorColor?: string;
+  buttonContainerStyle?: ViewProps['style'];
 }
 
 const Screen = React.forwardRef<any, ScreenProps>(
@@ -38,6 +39,7 @@ const Screen = React.forwardRef<any, ScreenProps>(
       footerComponent,
       scrollable = true,
       loadingIndicatorColor,
+      buttonContainerStyle,
       ...props
     },
     ref
@@ -76,7 +78,7 @@ const Screen = React.forwardRef<any, ScreenProps>(
         {content}
 
         {(primaryButton || footerComponent) && (
-          <ButtonContainer insetBottom={insets.bottom}>
+          <ButtonContainer insetBottom={insets.bottom} style={buttonContainerStyle}>
             {primaryButton && (
               <Button
                 backgroundColor={primaryButton.backgroundColor}
