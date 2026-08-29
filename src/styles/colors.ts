@@ -1,0 +1,21 @@
+export const colors = {
+  primary: '#28AF6E',
+  primaryText: '#000000',
+  background: '#ffffff',
+  primaryOpacity: 'rgba(89, 113, 101, 0.7)',
+  white: '#fff',
+
+  surface: '#fff',
+  blue: '#2196F3',
+  orange: '#FF9800',
+  purple: '#9C27B0',
+  blueText: '#1565c0',
+  orangeText: '#e65100',
+  purpleText: '#6a1b9a',
+  text: '#333',
+  secondaryText: '#666',
+  inactive: '#999',
+  mutedLight: 'rgba(255, 255, 255, 0.8)',
+  border: '#e0e0e0',
+  black: '#000',
+} as const;
