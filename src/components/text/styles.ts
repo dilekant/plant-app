@@ -1,5 +1,7 @@
 import styled from 'styled-components/native';
 
+import { FONT_FAMILY } from '@/assets';
+
 export const StyledText = styled.Text<{
   fontSize?: number;
   fontWeight?: string;
@@ -18,6 +20,7 @@ export const StyledText = styled.Text<{
     letterSpacing,
   }) => ({
     fontSize: normalizeSize(fontSize),
+    fontFamily: FONT_FAMILY.rubik,
     fontWeight,
     color: color || colors.primaryText,
     textAlign: textAlign as any,
