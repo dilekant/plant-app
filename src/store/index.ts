@@ -4,6 +4,9 @@ import { persistReducer, persistStore } from 'redux-persist';
 
 import onboardingReducer from './onboardingSlice';
 
+import { categoriesApi } from '@/screens/app/Home/actions/getCategories';
+import { questionsApi } from '@/screens/app/Home/actions/getQuestions';
+
 const persistConfig = {
   key: 'root',
   storage: AsyncStorage,
@@ -12,6 +15,8 @@ const persistConfig = {
 
 const rootReducer = combineReducers({
   onboarding: onboardingReducer,
+  [categoriesApi.reducerPath]: categoriesApi.reducer,
+  [questionsApi.reducerPath]: questionsApi.reducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
@@ -21,7 +26,7 @@ export const store = configureStore({
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: false,
-    }),
+    }).concat(categoriesApi.middleware, questionsApi.middleware),
 });
 
 export const persistor = persistStore(store);

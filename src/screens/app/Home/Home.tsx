@@ -2,9 +2,9 @@ import { FlatList } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useTheme } from 'styled-components/native';
 
+import { useGetCategoriesQuery } from './actions/getCategories';
+import { useGetQuestionsQuery } from './actions/getQuestions';
 import { CategoriesCard, QuestionsCard } from './components';
-import { useCategoriesQuery } from './queries/useCategoriesQuery';
-import { useQuestionsQuery } from './queries/useQuestionsQuery';
 import { ContentContainer, HeaderContainer, TextContainer } from './styles';
 
 import images from '@/assets/images';
@@ -14,8 +14,8 @@ const Home = () => {
   const insets = useSafeAreaInsets();
   const { normalizeSize, colors } = useTheme();
 
-  const { data: questions, isLoading: questionsLoading } = useQuestionsQuery();
-  const { data: categories, isLoading: categoriesLoading } = useCategoriesQuery();
+  const { data: questions, isLoading: questionsLoading } = useGetQuestionsQuery();
+  const { data: categories, isLoading: categoriesLoading } = useGetCategoriesQuery();
 
   const isScreenLoading = questionsLoading || categoriesLoading;
 
