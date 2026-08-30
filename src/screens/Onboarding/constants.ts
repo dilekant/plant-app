@@ -1,11 +1,10 @@
 import type { PayFeature, PayPlan } from './types';
 
-import FasterIcon from '@/assets/icons/faster.svg';
-import UnlimetedIcon from '@/assets/icons/unlimited.svg';
+import { FasterIcon, UnlimitedIcon } from '@/assets/svgs/icons';
 
 export const payFeatures: PayFeature[] = [
   {
-    icon: UnlimetedIcon,
+    icon: UnlimitedIcon,
     title: 'Unlimited',
     description: 'Plant Identify',
   },

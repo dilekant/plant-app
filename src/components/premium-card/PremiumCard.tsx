@@ -4,8 +4,7 @@ import { Text } from '../text';
 
 import { CardContainer, LeftContainer, TextContainer } from './styles';
 
-import ArrowRightIcon from '@/assets/icons/arrow-right.svg';
-import MessageIcon from '@/assets/icons/message.svg';
+import { ArrowRightIcon, MessageIcon } from '@/assets/svgs/icons';
 
 const PremiumCard = () => {
   const { colors, normalizeSize } = useTheme();

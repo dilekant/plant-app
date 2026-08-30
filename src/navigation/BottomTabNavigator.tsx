@@ -5,7 +5,13 @@ import { useTheme } from 'styled-components/native';
 
 import { TabBarIconContainer } from './styles';
 
-import { BarcodeIcon, DiagnoseIcon, HomeIcon, MyGardenIcon, ProfileIcon } from '@/assets/icons';
+import {
+  BarcodeIcon,
+  DiagnoseIcon,
+  HomeIcon,
+  MyGardenIcon,
+  ProfileIcon,
+} from '@/assets/svgs/icons';
 import { BottomTabParamList } from '@/navigation/types';
 import { BarcodeScanning, Diagnose, Home, MyGarden, Profile } from '@/screens';
 

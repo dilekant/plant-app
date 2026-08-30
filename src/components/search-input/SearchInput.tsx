@@ -2,7 +2,7 @@ import type { TextInputProps } from 'react-native';
 
 import { Input, InputContainer } from './styles';
 
-import { SearchIcon } from '@/assets/icons';
+import { SearchIcon } from '@/assets/svgs/icons';
 
 interface SearchInputProps extends Omit<TextInputProps, 'placeholder'> {
   placeholder: string;

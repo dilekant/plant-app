@@ -22,7 +22,6 @@ const Home = () => {
   return (
     <Screen
       isScreenLoading={isScreenLoading}
-      // scrollable={false}
       style={{
         paddingHorizontal: 0,
         paddingTop: 0,

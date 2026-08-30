@@ -9,6 +9,7 @@ import {
   useWindowDimensions,
 } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { useDispatch } from 'react-redux';
 
 import { OnboardingPageOne } from './OnboardingPageOne';
 import { OnboardingPageTwo } from './OnboardingPageTwo';
@@ -17,26 +18,30 @@ import { PaginationDots, PaywallFooter } from './components';
 import { CarouselPage, PaginationContainer } from './styles';
 
 import { Screen } from '@/components';
+import { completeOnboarding } from '@/store/onboardingSlice';
 import { colors, useTheme } from '@/theme';
-import { storageUtils } from '@/utils/storageUtils';
 
 const pages = [OnboardingPageOne, OnboardingPageTwo, PaywallPage];
 
 const OnboardingContainer = () => {
+  const dispatch = useDispatch();
   const flatListRef = useRef<FlatList<(typeof pages)[number]>>(null);
-  const [activeIndex, setActiveIndex] = useState(0);
+
   const { width } = useWindowDimensions();
   const { normalizeSize } = useTheme();
+
   const insets = useSafeAreaInsets();
+
+  const [activeIndex, setActiveIndex] = useState(0);
   const isLastPage = activeIndex === pages.length - 1;
 
-  const handleNext = async () => {
+  const handleNext = () => {
     if (activeIndex < pages.length - 1) {
       flatListRef.current?.scrollToIndex({ animated: true, index: activeIndex + 1 });
       return;
     }
 
-    await storageUtils.setOnboardingCompleted();
+    dispatch(completeOnboarding());
   };
 
   const handleMomentumScrollEnd = (event: NativeSyntheticEvent<NativeScrollEvent>) => {
