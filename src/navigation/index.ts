@@ -1,10 +1,10 @@
 // Navigation
-export { RootNavigator } from './RootNavigator';
+export { default as MainNavigator } from './MainNavigator';
 export { OnboardingNavigator } from './OnboardingNavigator';
-export { BottomTabNavigator } from './BottomTabNavigator';
+export { RootNavigator } from './RootNavigator';
 export type {
-  RootStackParamList,
-  OnboardingStackParamList,
   BottomTabParamList,
   BottomTabScreenProps,
+  OnboardingStackParamList,
+  RootStackParamList,
 } from './types';

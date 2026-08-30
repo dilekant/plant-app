@@ -2,7 +2,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { useSelector } from 'react-redux';
 
-import BottomTabNavigator from '@/navigation/BottomTabNavigator';
+import MainNavigator from '@/navigation/MainNavigator';
 import { OnboardingNavigator } from '@/navigation/OnboardingNavigator';
 import { RootStackParamList } from '@/navigation/types';
 import { RootState } from '@/store';
@@ -22,7 +22,7 @@ export function RootNavigator() {
         {!isOnboardingCompleted ? (
           <RootStack.Screen component={OnboardingNavigator} name="Onboarding" />
         ) : (
-          <RootStack.Screen component={BottomTabNavigator} name="MainApp" />
+          <RootStack.Screen component={MainNavigator} name="MainApp" />
         )}
       </RootStack.Navigator>
     </NavigationContainer>

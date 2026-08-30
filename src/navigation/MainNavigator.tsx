@@ -17,7 +17,7 @@ import { BarcodeScanning, Diagnose, Home, MyGarden, Profile } from '@/screens';
 
 const BottomTab = createBottomTabNavigator<BottomTabParamList>();
 
-const BottomTabNavigator = () => {
+const MainNavigator = () => {
   const { normalizeSize, colors } = useTheme();
 
   return (
@@ -48,7 +48,7 @@ const BottomTabNavigator = () => {
         options={{
           tabBarLabel: 'Home',
           tabBarIcon: ({ color, size }) => <HomeIcon color={color} height={size} width={size} />,
-          title: 'Ana Sayfa',
+          title: 'Home',
           headerShown: false,
         }}
       />
@@ -60,7 +60,7 @@ const BottomTabNavigator = () => {
           tabBarIcon: ({ color, size }) => (
             <DiagnoseIcon color={color} height={size} width={size} />
           ),
-          title: 'Tanı Yap',
+          title: 'Diagnose',
         }}
       />
       <BottomTab.Screen
@@ -89,7 +89,7 @@ const BottomTabNavigator = () => {
           tabBarIcon: ({ color, size }) => (
             <MyGardenIcon color={color} height={size} width={size} />
           ),
-          title: 'Bahçem',
+          title: 'MyGarden',
         }}
       />
       <BottomTab.Screen
@@ -98,11 +98,11 @@ const BottomTabNavigator = () => {
         options={{
           tabBarLabel: 'Profile',
           tabBarIcon: ({ color, size }) => <ProfileIcon color={color} height={size} width={size} />,
-          title: 'Profil',
+          title: 'Profile',
         }}
       />
     </BottomTab.Navigator>
   );
 };
 
-export default BottomTabNavigator;
+export default MainNavigator;
