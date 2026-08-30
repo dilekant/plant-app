@@ -10,7 +10,9 @@
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "start": "react-native start",
-    "test": "jest"
+    "test": "jest --runInBand",
+    "test:components": "jest --runInBand src/components/components.test.tsx",
+    "test:screens": "jest --runInBand src/screens/screens.test.tsx"
   },
   "dependencies": {
     "@react-native-async-storage/async-storage": "^3.1.1",
