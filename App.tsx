@@ -9,7 +9,7 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { ThemeProvider } from 'styled-components/native';
 
 import { RootNavigator } from '@/navigation/RootNavigator';
-import { theme } from '@/styles';
+import { theme } from '@/theme';
 
 function App() {
   return (

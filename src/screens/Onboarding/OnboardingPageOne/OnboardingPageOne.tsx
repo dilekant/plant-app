@@ -1,4 +1,4 @@
-import { OnboardingIllustrationPage } from './components/OnboardingIllustrationPage';
+import { OnboardingIllustrationPage } from '../components/OnboardingIllustrationPage';
 
 import images from '@/assets/images';
 import { Text } from '@/components';
@@ -16,4 +16,4 @@ const OnboardingPageOne = () => {
   );
 };
 
-export { OnboardingPageOne };
+export default OnboardingPageOne;

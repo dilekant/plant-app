@@ -9,7 +9,7 @@ import {
 import type { PayPlan } from '../types';
 
 import { Text } from '@/components';
-import { useTheme } from '@/styles';
+import { useTheme } from '@/theme';
 
 interface PaywallPlanOptionProps {
   isSelected: boolean;

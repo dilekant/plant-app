@@ -5,7 +5,7 @@ import type { ImageSourcePropType } from 'react-native';
 import { HeaderTextContainer } from '../styles';
 
 import { Image, Screen, Text } from '@/components';
-import { useTheme } from '@/styles/useTheme';
+import { useTheme } from '@/theme/useTheme';
 
 interface OnboardingIllustrationPageProps {
   image: ImageSourcePropType;

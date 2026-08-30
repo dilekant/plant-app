@@ -3,14 +3,14 @@ import { useRef, useState } from 'react';
 import { FlatList, ListRenderItemInfo } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
-import { PaywallFeatureCard } from './components/PaywallFeatureCard';
-import { PaywallPlanOption } from './components/PaywallPlanOption';
-import { payFeatures, payPlans } from './constants';
-import { ContentContainer, FeaturesContainer, TextContainer } from './styles';
+import { PaywallFeatureCard } from '../components/PaywallFeatureCard';
+import { PaywallPlanOption } from '../components/PaywallPlanOption';
+import { payFeatures, payPlans } from '../constants';
+import { ContentContainer, FeaturesContainer, TextContainer } from '../styles';
 
 import images from '@/assets/images';
 import { Image, Screen, Text } from '@/components';
-import { useTheme } from '@/styles';
+import { useTheme } from '@/theme';
 
 const PaywallPage = () => {
   const { normalizeSize, colors } = useTheme();
@@ -79,4 +79,4 @@ const PaywallPage = () => {
   );
 };
 
-export { PaywallPage };
+export default PaywallPage;

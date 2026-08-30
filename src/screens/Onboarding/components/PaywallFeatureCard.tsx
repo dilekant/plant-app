@@ -4,7 +4,7 @@ import { FeaturesContentContainer } from '../styles';
 import type { PayFeature } from '../types';
 
 import { Text } from '@/components';
-import { useTheme } from '@/styles';
+import { useTheme } from '@/theme';
 
 interface PaywallFeatureCardProps {
   feature: PayFeature;

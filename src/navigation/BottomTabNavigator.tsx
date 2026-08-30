@@ -5,7 +5,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { BottomTabParamList } from '@/navigation/types';
 import { DiagnoseScreen, HomeScreen, MyGardenScreen, ProfileScreen } from '@/screens';
 import BarcodeScanningScreen from '@/screens/app/BarcodeScanning/BarcodeScanningScreen';
-import { colors, normalizeSize } from '@/styles';
+import { colors, normalizeSize } from '@/theme';
 
 const BottomTab = createBottomTabNavigator<BottomTabParamList>();
 

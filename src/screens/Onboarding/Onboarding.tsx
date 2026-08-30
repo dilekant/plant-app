@@ -5,6 +5,7 @@ import {
   ListRenderItemInfo,
   NativeScrollEvent,
   NativeSyntheticEvent,
+  StatusBar,
   useWindowDimensions,
 } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -17,7 +18,7 @@ import { CarouselPage, PaginationContainer } from './styles';
 
 import { Screen } from '@/components';
 import { PaginationDots } from '@/components/PaginationDots';
-import { colors, useTheme } from '@/styles';
+import { colors, useTheme } from '@/theme';
 import { storageUtils } from '@/utils/storageUtils';
 
 const pages = [OnboardingPageOne, OnboardingPageTwo, PaywallPage];
@@ -55,41 +56,44 @@ const OnboardingContainer = () => {
   );
 
   return (
-    <Screen
-      buttonContainerStyle={{ paddingBottom: insets.bottom + normalizeSize(isLastPage ? 0 : 20) }}
-      footerComponent={
-        !isLastPage ? (
-          <PaginationContainer>
-            <PaginationDots activeIndex={activeIndex} count={pages.length} />
-          </PaginationContainer>
-        ) : (
-          <PaywallFooter />
-        )
-      }
-      primaryButton={{
-        text: activeIndex === pages.length - 1 ? 'Try free for 3 days' : 'Continue',
-        onPress: handleNext,
-      }}
-      style={{
-        paddingHorizontal: 0,
-        paddingTop: 0,
-        paddingBottom: 0,
-        backgroundColor: colors.primaryBackground,
-      }}
-    >
-      <FlatList
-        horizontal
-        nestedScrollEnabled
-        pagingEnabled
-        data={pages}
-        getItemLayout={(_, index) => ({ index, length: width, offset: width * index })}
-        keyExtractor={(_, index) => index.toString()}
-        onMomentumScrollEnd={handleMomentumScrollEnd}
-        ref={flatListRef}
-        renderItem={renderItem}
-        showsHorizontalScrollIndicator={false}
-      />
-    </Screen>
+    <>
+      <StatusBar barStyle={isLastPage ? 'light-content' : 'dark-content'} />
+      <Screen
+        buttonContainerStyle={{ paddingBottom: insets.bottom + normalizeSize(isLastPage ? 0 : 20) }}
+        footerComponent={
+          !isLastPage ? (
+            <PaginationContainer>
+              <PaginationDots activeIndex={activeIndex} count={pages.length} />
+            </PaginationContainer>
+          ) : (
+            <PaywallFooter />
+          )
+        }
+        primaryButton={{
+          text: isLastPage ? 'Try free for 3 days' : 'Continue',
+          onPress: handleNext,
+        }}
+        style={{
+          paddingHorizontal: 0,
+          paddingTop: 0,
+          paddingBottom: 0,
+          backgroundColor: colors.primaryBackground,
+        }}
+      >
+        <FlatList
+          horizontal
+          nestedScrollEnabled
+          pagingEnabled
+          data={pages}
+          getItemLayout={(_, index) => ({ index, length: width, offset: width * index })}
+          keyExtractor={(_, index) => index.toString()}
+          onMomentumScrollEnd={handleMomentumScrollEnd}
+          ref={flatListRef}
+          renderItem={renderItem}
+          showsHorizontalScrollIndicator={false}
+        />
+      </Screen>
+    </>
   );
 };
 

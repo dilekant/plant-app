@@ -3,7 +3,6 @@ import React from 'react';
 import { ActivityIndicator, ViewProps } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
-import { useTheme } from '../../styles';
 import { Button } from '../button';
 
 import {
@@ -13,6 +12,8 @@ import {
   ScreenContent,
   ScreenScrollView,
 } from './styles';
+
+import { useTheme } from '@/theme';
 
 interface ScreenProps extends Omit<ViewProps, 'children'> {
   children: React.ReactNode;

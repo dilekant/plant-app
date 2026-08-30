@@ -1,7 +1,7 @@
 import { View } from 'react-native';
 import styled from 'styled-components/native';
 
-import { normalizeSize } from '@/styles';
+import { normalizeSize } from '@/theme';
 
 type PaginationDotsProps = {
   activeIndex: number;
