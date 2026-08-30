@@ -1,15 +1,20 @@
 import React from 'react';
 
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { useTheme } from 'styled-components/native';
 
+import { TabBarIconContainer } from './styles';
+
+import { BarcodeIcon, DiagnoseIcon, HomeIcon, MyGardenIcon, ProfileIcon } from '@/assets/icons';
 import { BottomTabParamList } from '@/navigation/types';
 import { DiagnoseScreen, HomeScreen, MyGardenScreen, ProfileScreen } from '@/screens';
 import BarcodeScanningScreen from '@/screens/app/BarcodeScanning/BarcodeScanningScreen';
-import { colors, normalizeSize } from '@/theme';
 
 const BottomTab = createBottomTabNavigator<BottomTabParamList>();
 
-export function BottomTabNavigator() {
+const BottomTabNavigator = () => {
+  const { normalizeSize, colors } = useTheme();
+
   return (
     <BottomTab.Navigator
       screenOptions={{
@@ -37,6 +42,7 @@ export function BottomTabNavigator() {
         name="Home"
         options={{
           tabBarLabel: 'Home',
+          tabBarIcon: ({ color, size }) => <HomeIcon color={color} height={size} width={size} />,
           title: 'Ana Sayfa',
         }}
       />
@@ -45,6 +51,9 @@ export function BottomTabNavigator() {
         name="Diagnose"
         options={{
           tabBarLabel: 'Diagnose',
+          tabBarIcon: ({ color, size }) => (
+            <DiagnoseIcon color={color} height={size} width={size} />
+          ),
           title: 'Tanı Yap',
         }}
       />
@@ -52,7 +61,17 @@ export function BottomTabNavigator() {
         component={BarcodeScanningScreen}
         name="BarcodeScanning"
         options={{
-          tabBarLabel: 'Barcode',
+          tabBarLabel: '',
+          tabBarIcon: () => (
+            <TabBarIconContainer>
+              <BarcodeIcon
+                color={colors.white}
+                height={normalizeSize(25)}
+                width={normalizeSize(25)}
+              />
+            </TabBarIconContainer>
+          ),
+          tabBarIconStyle: { marginTop: -normalizeSize(21) },
           title: 'Barkod Tara',
         }}
       />
@@ -61,6 +80,9 @@ export function BottomTabNavigator() {
         name="MyGarden"
         options={{
           tabBarLabel: 'Garden',
+          tabBarIcon: ({ color, size }) => (
+            <MyGardenIcon color={color} height={size} width={size} />
+          ),
           title: 'Bahçem',
         }}
       />
@@ -69,9 +91,12 @@ export function BottomTabNavigator() {
         name="Profile"
         options={{
           tabBarLabel: 'Profile',
+          tabBarIcon: ({ color, size }) => <ProfileIcon color={color} height={size} width={size} />,
           title: 'Profil',
         }}
       />
     </BottomTab.Navigator>
   );
-}
+};
+
+export default BottomTabNavigator;

@@ -1,7 +1,7 @@
 import type { PayFeature, PayPlan } from './types';
 
-import FasterIcon from '@/assets/svgs/faster.svg';
-import UnlimetedIcon from '@/assets/svgs/unlimited.svg';
+import FasterIcon from '@/assets/icons/faster.svg';
+import UnlimetedIcon from '@/assets/icons/unlimited.svg';
 
 export const payFeatures: PayFeature[] = [
   {

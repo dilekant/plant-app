@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-import { BottomTabNavigator } from '@/navigation/BottomTabNavigator';
+import BottomTabNavigator from '@/navigation/BottomTabNavigator';
 import { OnboardingNavigator } from '@/navigation/OnboardingNavigator';
 import { RootStackParamList } from '@/navigation/types';
 import { storageUtils } from '@/utils/storageUtils';

@@ -12,6 +12,8 @@ export const colors = {
   whiteOpacity15: 'rgba(255, 255, 255, 0.15)',
   whiteOpacity30: 'rgba(255, 255, 255, 0.3)',
   whiteOpacity52: 'rgba(255, 255, 255, 0.52)',
+  whiteOpacity24: 'rgba(255, 255, 255, 0.24)',
+  inactive: '#BDBDBD',
 
   surface: '#fff',
   blue: '#2196F3',
@@ -22,7 +24,6 @@ export const colors = {
   purpleText: '#6a1b9a',
   text: '#333',
   secondaryText: '#666',
-  inactive: '#999',
   mutedLight: 'rgba(255, 255, 255, 0.8)',
   border: '#e0e0e0',
   black: '#000',
