@@ -6,7 +6,7 @@ import { Text } from '@/components';
 const OnboardingPageTwo = () => {
   return (
     <OnboardingIllustrationPage
-      image={images.onboardingOne}
+      image={images.onboardingTwo}
       title={
         <>
           Get plant <Text variant="headingExtraBold">care guides</Text>

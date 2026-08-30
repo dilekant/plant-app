@@ -6,10 +6,18 @@ import {
   NativeScrollEvent,
   NativeSyntheticEvent,
   StatusBar,
+  StyleSheet,
   useWindowDimensions,
 } from 'react-native';
+import Animated, {
+  interpolateColor,
+  useAnimatedScrollHandler,
+  useAnimatedStyle,
+  useSharedValue,
+} from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useDispatch } from 'react-redux';
+import { useTheme } from 'styled-components/native';
 
 import { OnboardingPageOne } from './OnboardingPageOne';
 import { OnboardingPageTwo } from './OnboardingPageTwo';
@@ -19,7 +27,6 @@ import { CarouselPage, PaginationContainer } from './styles';
 
 import { Screen } from '@/components';
 import { completeOnboarding } from '@/store/onboardingSlice';
-import { colors, useTheme } from '@/theme';
 
 const pages = [OnboardingPageOne, OnboardingPageTwo, PaywallPage];
 
@@ -28,7 +35,8 @@ const OnboardingContainer = () => {
   const flatListRef = useRef<FlatList<(typeof pages)[number]>>(null);
 
   const { width } = useWindowDimensions();
-  const { normalizeSize } = useTheme();
+  const { normalizeSize, colors } = useTheme();
+  const scrollX = useSharedValue(0);
 
   const insets = useSafeAreaInsets();
 
@@ -49,6 +57,20 @@ const OnboardingContainer = () => {
     setActiveIndex(index);
   };
 
+  const handleScroll = useAnimatedScrollHandler({
+    onScroll: (event) => {
+      scrollX.value = event.contentOffset.x;
+    },
+  });
+
+  const footerBackgroundStyle = useAnimatedStyle(() => ({
+    backgroundColor: interpolateColor(
+      scrollX.value,
+      [0, width, width * (pages.length - 1)],
+      [colors.white, colors.white, colors.primaryBackground]
+    ),
+  }));
+
   useEffect(() => {
     flatListRef.current?.scrollToOffset({ animated: false, offset: activeIndex * width });
   }, [activeIndex, width]);
@@ -63,7 +85,18 @@ const OnboardingContainer = () => {
     <>
       <StatusBar barStyle={isLastPage ? 'light-content' : 'dark-content'} />
       <Screen
-        buttonContainerStyle={{ paddingBottom: insets.bottom + normalizeSize(isLastPage ? 0 : 20) }}
+        buttonContainerBackground={
+          <Animated.View
+            pointerEvents="none"
+            style={[StyleSheet.absoluteFill, footerBackgroundStyle]}
+          />
+        }
+        buttonContainerStyle={{
+          paddingBottom: insets.bottom + normalizeSize(isLastPage ? 0 : 20),
+        }}
+        contentContainerStyle={{
+          paddingBottom: 0,
+        }}
         footerComponent={
           !isLastPage ? (
             <PaginationContainer>
@@ -84,7 +117,7 @@ const OnboardingContainer = () => {
           backgroundColor: colors.primaryBackground,
         }}
       >
-        <FlatList
+        <Animated.FlatList
           horizontal
           nestedScrollEnabled
           pagingEnabled
@@ -92,8 +125,10 @@ const OnboardingContainer = () => {
           getItemLayout={(_, index) => ({ index, length: width, offset: width * index })}
           keyExtractor={(_, index) => index.toString()}
           onMomentumScrollEnd={handleMomentumScrollEnd}
+          onScroll={handleScroll}
           ref={flatListRef}
           renderItem={renderItem}
+          scrollEventThrottle={16}
           showsHorizontalScrollIndicator={false}
         />
       </Screen>

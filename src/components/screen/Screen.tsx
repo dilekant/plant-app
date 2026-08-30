@@ -29,6 +29,8 @@ interface ScreenProps extends Omit<ViewProps, 'children'> {
   scrollable?: boolean;
   loadingIndicatorColor?: string;
   buttonContainerStyle?: ViewProps['style'];
+  buttonContainerBackground?: React.ReactNode;
+  contentContainerStyle?: ViewProps['style'];
 }
 
 const Screen = React.forwardRef<any, ScreenProps>(
@@ -41,6 +43,8 @@ const Screen = React.forwardRef<any, ScreenProps>(
       scrollable = true,
       loadingIndicatorColor,
       buttonContainerStyle,
+      buttonContainerBackground,
+      contentContainerStyle,
       ...props
     },
     ref
@@ -60,10 +64,13 @@ const Screen = React.forwardRef<any, ScreenProps>(
 
     const content = scrollable ? (
       <ScreenScrollView
-        contentContainerStyle={{
-          flexGrow: 1,
-          paddingBottom: primaryButton ? insets.bottom + 55 : insets.bottom,
-        }}
+        contentContainerStyle={[
+          {
+            flexGrow: 1,
+            paddingBottom: primaryButton ? insets.bottom + 55 : insets.bottom,
+          },
+          contentContainerStyle,
+        ]}
         showsVerticalScrollIndicator={false}
       >
         {children}
@@ -80,6 +87,7 @@ const Screen = React.forwardRef<any, ScreenProps>(
 
         {(primaryButton || footerComponent) && (
           <ButtonContainer insetBottom={insets.bottom} style={buttonContainerStyle}>
+            {buttonContainerBackground}
             {primaryButton && (
               <Button
                 backgroundColor={primaryButton.backgroundColor}

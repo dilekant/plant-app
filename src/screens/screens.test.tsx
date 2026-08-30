@@ -33,6 +33,20 @@ jest.mock('react-redux', () => ({
   useDispatch: () => mockDispatch,
 }));
 
+jest.mock('react-native-reanimated', () => {
+  const { FlatList, View } = require('react-native');
+
+  return {
+    __esModule: true,
+    default: { FlatList, View },
+    interpolateColor: () => '#ffffff',
+    useAnimatedScrollHandler: (handlers: { onScroll: (event: unknown) => void }) =>
+      handlers.onScroll,
+    useAnimatedStyle: (updater: () => object) => updater(),
+    useSharedValue: (value: number) => ({ value }),
+  };
+});
+
 jest.mock('@/assets/svgs/icons', () => {
   const { View } = require('react-native');
 

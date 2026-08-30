@@ -8,6 +8,7 @@ import Button from './button/Button';
 import { Image } from './image/Image';
 import { PremiumCard } from './premium-card/PremiumCard';
 import { Screen } from './screen/Screen';
+import { ScreenContent } from './screen/styles';
 import { SearchInput } from './search-input/SearchInput';
 import { Text } from './text/Text';
 
@@ -87,6 +88,17 @@ describe('components', () => {
     );
 
     expect(tree.root.findByType(ActivityIndicator)).toBeTruthy();
+  });
+
+  it('forwards content styles to non-scrollable screens', () => {
+    const contentContainerStyle = { paddingBottom: 0 };
+    const tree = render(
+      <Screen contentContainerStyle={contentContainerStyle} scrollable={false}>
+        <Text>Plant list</Text>
+      </Screen>
+    );
+
+    expect(tree.root.findByType(ScreenContent).props.style).toEqual(contentContainerStyle);
   });
 
   it('renders a primary screen button and calls its handler', () => {
