@@ -67,7 +67,7 @@ const OnboardingContainer = () => {
     backgroundColor: interpolateColor(
       scrollX.value,
       [0, width, width * (pages.length - 1)],
-      [colors.white, colors.white, colors.primaryBackground]
+      [colors.transparent, colors.white, colors.primaryBackground]
     ),
   }));
 
