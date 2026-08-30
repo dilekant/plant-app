@@ -1,6 +1,6 @@
 import { Screen, Text } from '@/components';
 
-const MyGardenScreen = () => {
+const BarcodeScanning = () => {
   return (
     <Screen>
       <Text>Welcome to PlantApp!</Text>
@@ -8,4 +8,4 @@ const MyGardenScreen = () => {
   );
 };
 
-export default MyGardenScreen;
+export default BarcodeScanning;

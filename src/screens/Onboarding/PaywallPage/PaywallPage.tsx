@@ -3,8 +3,7 @@ import { useRef, useState } from 'react';
 import { FlatList, ListRenderItemInfo } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
-import { PaywallFeatureCard } from '../components/PaywallFeatureCard';
-import { PaywallPlanOption } from '../components/PaywallPlanOption';
+import { PaywallFeatureCard, PaywallPlanOption } from '../components';
 import { payFeatures, payPlans } from '../constants';
 import { ContentContainer, FeaturesContainer, TextContainer } from '../styles';
 

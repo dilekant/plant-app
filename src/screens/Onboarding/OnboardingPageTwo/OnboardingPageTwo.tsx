@@ -1,4 +1,4 @@
-import { OnboardingIllustrationPage } from '../components/OnboardingIllustrationPage';
+import { OnboardingIllustrationPage } from '../components';
 
 import images from '@/assets/images';
 import { Text } from '@/components';

@@ -13,11 +13,10 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { OnboardingPageOne } from './OnboardingPageOne';
 import { OnboardingPageTwo } from './OnboardingPageTwo';
 import { PaywallPage } from './PaywallPage';
-import PaywallFooter from './components/PaywallFooter';
+import { PaginationDots, PaywallFooter } from './components';
 import { CarouselPage, PaginationContainer } from './styles';
 
 import { Screen } from '@/components';
-import { PaginationDots } from '@/components/PaginationDots';
 import { colors, useTheme } from '@/theme';
 import { storageUtils } from '@/utils/storageUtils';
 

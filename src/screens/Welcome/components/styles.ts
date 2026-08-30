@@ -4,6 +4,7 @@ export const HeaderTextContainer = styled.View`
   ${({ theme: { normalizeSize } }) => ({
     paddingHorizontal: normalizeSize(24),
     marginBottom: normalizeSize(24),
+    gap: normalizeSize(8),
   })}
 `;
 

@@ -7,8 +7,7 @@ import { TabBarIconContainer } from './styles';
 
 import { BarcodeIcon, DiagnoseIcon, HomeIcon, MyGardenIcon, ProfileIcon } from '@/assets/icons';
 import { BottomTabParamList } from '@/navigation/types';
-import { DiagnoseScreen, HomeScreen, MyGardenScreen, ProfileScreen } from '@/screens';
-import BarcodeScanningScreen from '@/screens/app/BarcodeScanning/BarcodeScanningScreen';
+import { BarcodeScanning, Diagnose, Home, MyGarden, Profile } from '@/screens';
 
 const BottomTab = createBottomTabNavigator<BottomTabParamList>();
 
@@ -38,16 +37,17 @@ const BottomTabNavigator = () => {
       }}
     >
       <BottomTab.Screen
-        component={HomeScreen}
+        component={Home}
         name="Home"
         options={{
           tabBarLabel: 'Home',
           tabBarIcon: ({ color, size }) => <HomeIcon color={color} height={size} width={size} />,
           title: 'Ana Sayfa',
+          headerShown: false,
         }}
       />
       <BottomTab.Screen
-        component={DiagnoseScreen}
+        component={Diagnose}
         name="Diagnose"
         options={{
           tabBarLabel: 'Diagnose',
@@ -58,7 +58,7 @@ const BottomTabNavigator = () => {
         }}
       />
       <BottomTab.Screen
-        component={BarcodeScanningScreen}
+        component={BarcodeScanning}
         name="BarcodeScanning"
         options={{
           tabBarLabel: '',
@@ -76,7 +76,7 @@ const BottomTabNavigator = () => {
         }}
       />
       <BottomTab.Screen
-        component={MyGardenScreen}
+        component={MyGarden}
         name="MyGarden"
         options={{
           tabBarLabel: 'Garden',
@@ -87,7 +87,7 @@ const BottomTabNavigator = () => {
         }}
       />
       <BottomTab.Screen
-        component={ProfileScreen}
+        component={Profile}
         name="Profile"
         options={{
           tabBarLabel: 'Profile',

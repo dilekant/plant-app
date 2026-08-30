@@ -20,4 +20,4 @@ const PaywallFooter = () => {
   );
 };
 
-export default PaywallFooter;
+export { PaywallFooter };

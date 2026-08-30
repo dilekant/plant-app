@@ -1,6 +1,6 @@
 import { Screen, Text } from '@/components';
 
-const DiagnoseScreen = () => {
+const Profile = () => {
   return (
     <Screen>
       <Text>Welcome to PlantApp!</Text>
@@ -8,4 +8,4 @@ const DiagnoseScreen = () => {
   );
 };
 
-export default DiagnoseScreen;
+export default Profile;

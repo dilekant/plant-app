@@ -6,4 +6,7 @@ export default {
   onboardingOne: require('./onboarding-one.png'),
   onboardingTwo: require('./onboarding-two.png'),
   onboardingPaywall: require('./onboarding-paywall.png'),
+
+  //Home
+  homeTopBackground: require('./home-background.png'),
 };

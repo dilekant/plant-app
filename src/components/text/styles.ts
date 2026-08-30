@@ -16,7 +16,6 @@ export const StyledText = styled.Text<{
     fontWeight = 'normal',
     color,
     textAlign = 'auto',
-    lineHeight,
     letterSpacing,
   }) => ({
     fontSize: normalizeSize(fontSize),
@@ -24,7 +23,6 @@ export const StyledText = styled.Text<{
     fontWeight,
     color: color || colors.primaryText,
     textAlign: textAlign as any,
-    lineHeight: lineHeight ? normalizeSize(lineHeight) : normalizeSize(fontSize * 1.5),
     letterSpacing,
   })}
 `;
