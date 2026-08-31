@@ -4,27 +4,50 @@ A mobile application focused on plant care and identification, developed with Re
 
 ## Table of Contents
 
-* [Features](#features)
-* [Technology Stack](#technology-stack)
-* [Project Structure](#project-structure)
-* [Installation](#installation)
-* [Environment Variables](#environment-variables)
-* [Running the App](#running-the-app)
-* [NPM Scripts](#npm-scripts)
-* [Testing](#testing)
-* [Code Quality](#code-quality)
+- [Features](#features)
+- [Technology Stack](#technology-stack)
+- [Project Structure](#project-structure)
+- [Installation](#installation)
+- [Environment Variables](#environment-variables)
+- [Running the App](#running-the-app)
+- [NPM Scripts](#npm-scripts)
+- [Testing](#testing)
+- [Code Quality](#code-quality)
 
 ## Features
 
-* **Onboarding flow**: A horizontally paginated `FlatList`-based carousel (`OnboardingPageOne`, `OnboardingPageTwo`, `PaywallPage`) guides users through the introductory screens. It includes page indicators (`PaginationDots`) and an animated background/footer transition based on the scroll position using `react-native-reanimated`.
-* **Paywall screen**: A premium purchase screen featuring feature cards (`PaywallFeatureCard`), subscription plan selection (`PaywallPlanOption`), and a legal text footer (`PaywallFooter`).
-* **Welcome screen**: Entry screen that directs users to the onboarding flow.
-* **Main tabs (Bottom Tabs)**: Navigation between `Home`, `Diagnose`, `BarcodeScanning`, `MyGarden`, and `Profile` tabs.
-* **Home screen**: Questions (`getQuestions`) and categories (`getCategories`) are fetched from the remote API using RTK Query. The screen includes a search input, premium card, horizontal question list, and a two-column category list.
-* **Diagnose, BarcodeScanning, MyGarden, Profile**: Navigation structure is implemented, while the content of these screens is currently under development and represented by placeholder screens.
-* **Persistent state**: The onboarding completion state is stored on the device using `redux-persist` and `AsyncStorage`, allowing the application to resume from the appropriate state when launched.
-* **Shared component library**: Reusable, theme-aware components such as `Button`, `Image`, `PremiumCard`, `Screen`, `SearchInput`, and `Text`.
-* **Theme system**: Centralized color palette and responsive sizing based on screen width using `styled-components` and `normalizeSize`.
+- **Onboarding flow**: A horizontally paginated `FlatList`-based carousel (`OnboardingPageOne`, `OnboardingPageTwo`, `PaywallPage`) guides users through the introductory screens. It includes page indicators (`PaginationDots`) and an animated background/footer transition based on the scroll position using `react-native-reanimated`.
+- **Paywall screen**: A premium purchase screen featuring feature cards (`PaywallFeatureCard`), subscription plan selection (`PaywallPlanOption`), and a legal text footer (`PaywallFooter`).
+- **Welcome screen**: Entry screen that directs users to the onboarding flow.
+- **Main tabs (Bottom Tabs)**: Navigation between `Home`, `Diagnose`, `BarcodeScanning`, `MyGarden`, and `Profile` tabs.
+- **Home screen**: Questions (`getQuestions`) and categories (`getCategories`) are fetched from the remote API using RTK Query. The screen includes a search input, premium card, horizontal question list, and a two-column category list.
+- **Diagnose, BarcodeScanning, MyGarden, Profile**: Navigation structure is implemented, while the content of these screens is currently under development and represented by placeholder screens.
+- **Persistent state**: The onboarding completion state is stored on the device using `redux-persist` and `AsyncStorage`, allowing the application to resume from the appropriate state when launched.
+- **Shared component library**: Reusable, theme-aware components such as `Button`, `Image`, `PremiumCard`, `Screen`, `SearchInput`, and `Text`.
+- **Theme system**: Centralized color palette and responsive sizing based on screen width using `styled-components` and `normalizeSize`.
+
+## Screenshots
+
+### Welcome & Onboarding
+
+<p align="center">
+  <img src="./screenshots/welcome.png" width="200" />
+  <img src="./screenshots/onboarding-one.png" width="200" />
+  <img src="./screenshots/onboarding-two.png" width="200" />
+</p>
+
+### Paywall
+
+<p align="center">
+  <img src="./screenshots/paywall-one.png" width="200" />
+  <img src="./screenshots/paywall-two.png" width="200" />
+</p>
+
+### Home
+
+<p align="center">
+  <img src="./screenshots/home.png" width="200" />
+</p>
 
 ## Technology Stack
 
@@ -118,9 +141,9 @@ npm run ios
 
 Tests are written using Jest and `react-test-renderer`:
 
-* `__tests__/App.test.tsx`: Verifies that the root application component renders without errors.
-* `src/components/components.test.tsx`: Tests rendering and interaction behavior of shared components.
-* `src/screens/screens.test.tsx`: Tests screen rendering, navigation, and basic interactions.
+- `__tests__/App.test.tsx`: Verifies that the root application component renders without errors.
+- `src/components/components.test.tsx`: Tests rendering and interaction behavior of shared components.
+- `src/screens/screens.test.tsx`: Tests screen rendering, navigation, and basic interactions.
 
 ```sh
 npm test
