@@ -4,7 +4,7 @@ import type { ImageSourcePropType } from 'react-native';
 
 import { HeaderTextContainer } from '../styles';
 
-import { Image, Screen, Text } from '@/components';
+import { Image, Screen } from '@/components';
 import { useTheme } from '@/theme/useTheme';
 
 interface OnboardingIllustrationPageProps {
@@ -17,9 +17,7 @@ const OnboardingIllustrationPage = ({ image, title }: OnboardingIllustrationPage
 
   return (
     <Screen style={{ paddingHorizontal: 0 }}>
-      <HeaderTextContainer>
-        <Text variant="headingMedium">{title}</Text>
-      </HeaderTextContainer>
+      <HeaderTextContainer>{title}</HeaderTextContainer>
       <Image source={image} style={{ height: normalizeSize(650), width: '100%' }} />
     </Screen>
   );

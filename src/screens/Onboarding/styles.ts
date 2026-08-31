@@ -6,6 +6,17 @@ export const HeaderTextContainer = styled.View`
   })}
 `;
 
+export const BrushTextContainer = styled.View`
+  ${() => ({
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+  })}
+`;
+
+export const BoldTextContainer = styled.View`
+  ${() => ({})}
+`;
+
 export const CarouselPage = styled.View<{ width: number }>`
   ${({ width }) => ({ width, flex: 1 })}
 `;
