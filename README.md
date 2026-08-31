@@ -1,132 +1,134 @@
 # PlantApp
 
-Bitki bakımı ve tanıma odaklı, React Native (New Architecture) ile geliştirilen mobil uygulama. Kullanıcıyı onboarding/paywall akışından geçirip, ana sekmeler üzerinden bitki bakım içeriklerine yönlendirir.
+A mobile application focused on plant care and identification, developed with React Native (New Architecture). The app guides users through an onboarding/paywall flow and provides access to plant care content through the main tabs.
 
-## İçindekiler
+## Table of Contents
 
-- [Özellikler](#özellikler)
-- [Teknoloji Yığını](#teknoloji-yığını)
-- [Proje Yapısı](#proje-yapısı)
-- [Kurulum](#kurulum)
-- [Ortam Değişkenleri](#ortam-değişkenleri)
-- [Çalıştırma](#çalıştırma)
-- [NPM Script'leri](#npm-scriptleri)
-- [Test](#test)
-- [Kod Kalitesi](#kod-kalitesi)
+* [Features](#features)
+* [Technology Stack](#technology-stack)
+* [Project Structure](#project-structure)
+* [Installation](#installation)
+* [Environment Variables](#environment-variables)
+* [Running the App](#running-the-app)
+* [NPM Scripts](#npm-scripts)
+* [Testing](#testing)
+* [Code Quality](#code-quality)
 
-## Özellikler
+## Features
 
-- **Onboarding akışı**: Yatay `FlatList` tabanlı, sayfalanabilir bir carousel (`OnboardingPageOne`, `OnboardingPageTwo`, `PaywallPage`) ile kullanıcıyı tanıtım ekranlarından geçirir; sayfa göstergesi (`PaginationDots`) ve kaydırma konumuna bağlı, `react-native-reanimated` ile animasyonlu arka plan/footer geçişi içerir.
-- **Paywall ekranı**: Özellik kartları (`PaywallFeatureCard`), abonelik planı seçimi (`PaywallPlanOption`) ve yasal metin footer'ı (`PaywallFooter`) içeren premium satış ekranı.
-- **Welcome ekranı**: Uygulamaya giriş ekranı, onboarding akışına yönlendirme.
-- **Ana sekmeler (Bottom Tabs)**: `Home`, `Diagnose`, `BarcodeScanning`, `MyGarden`, `Profile` sekmeleri arasında gezinme.
-- **Home ekranı**: RTK Query ile uzak API'den sorular (`getQuestions`) ve kategoriler (`getCategories`) çekilir; arama kutusu, premium kartı, yatay soru listesi ve iki kolonlu kategori listesi gösterilir.
-- **Diagnose, BarcodeScanning, MyGarden, Profile**: Navigasyon iskeleti hazır, içerikleri henüz geliştirilmemiş placeholder ekranlar.
-- **Kalıcı durum**: Onboarding'in tamamlanma durumu `redux-persist` ve `AsyncStorage` ile cihazda saklanır; uygulama açılışında kaldığı yerden devam eder.
-- **Ortak bileşen kütüphanesi**: `Button`, `Image`, `PremiumCard`, `Screen`, `SearchInput`, `Text` gibi tema destekli, tekrar kullanılabilir bileşenler.
-- **Tema sistemi**: `styled-components` üzerinden merkezi renk paleti ve ekran genişliğine göre ölçeklenen (`normalizeSize`) responsive boyutlandırma.
+* **Onboarding flow**: A horizontally paginated `FlatList`-based carousel (`OnboardingPageOne`, `OnboardingPageTwo`, `PaywallPage`) guides users through the introductory screens. It includes page indicators (`PaginationDots`) and an animated background/footer transition based on the scroll position using `react-native-reanimated`.
+* **Paywall screen**: A premium purchase screen featuring feature cards (`PaywallFeatureCard`), subscription plan selection (`PaywallPlanOption`), and a legal text footer (`PaywallFooter`).
+* **Welcome screen**: Entry screen that directs users to the onboarding flow.
+* **Main tabs (Bottom Tabs)**: Navigation between `Home`, `Diagnose`, `BarcodeScanning`, `MyGarden`, and `Profile` tabs.
+* **Home screen**: Questions (`getQuestions`) and categories (`getCategories`) are fetched from the remote API using RTK Query. The screen includes a search input, premium card, horizontal question list, and a two-column category list.
+* **Diagnose, BarcodeScanning, MyGarden, Profile**: Navigation structure is implemented, while the content of these screens is currently under development and represented by placeholder screens.
+* **Persistent state**: The onboarding completion state is stored on the device using `redux-persist` and `AsyncStorage`, allowing the application to resume from the appropriate state when launched.
+* **Shared component library**: Reusable, theme-aware components such as `Button`, `Image`, `PremiumCard`, `Screen`, `SearchInput`, and `Text`.
+* **Theme system**: Centralized color palette and responsive sizing based on screen width using `styled-components` and `normalizeSize`.
 
-## Teknoloji Yığını
+## Technology Stack
 
-| Kategori            | Teknoloji                                                                                                                                             |
-| ------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Çekirdek            | React 19.2.3, React Native 0.87.1, TypeScript                                                                                                         |
-| Navigasyon          | `@react-navigation/native`, `@react-navigation/native-stack`, `@react-navigation/bottom-tabs`, `react-native-screens`, `react-native-gesture-handler` |
-| State yönetimi      | `@reduxjs/toolkit` (RTK Query dahil), `react-redux`, `redux-persist`, `@react-native-async-storage/async-storage`                                     |
-| Stil                | `styled-components`                                                                                                                                   |
-| Animasyon           | `react-native-reanimated`, `react-native-worklets`                                                                                                    |
-| Grafik / SVG        | `react-native-svg`, `react-native-svg-transformer`                                                                                                    |
-| Layout yardımcıları | `react-native-safe-area-context`                                                                                                                      |
-| Ortam değişkenleri  | `react-native-dotenv`                                                                                                                                 |
-| Test                | `jest`, `react-test-renderer`, `@react-native/jest-preset`                                                                                            |
-| Kod kalitesi        | `eslint`, `prettier`, `@typescript-eslint`                                                                                                            |
+| Category              | Technology                                                                                                                                            |
+| --------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Core                  | React 19.2.3, React Native 0.87.1, TypeScript                                                                                                         |
+| Navigation            | `@react-navigation/native`, `@react-navigation/native-stack`, `@react-navigation/bottom-tabs`, `react-native-screens`, `react-native-gesture-handler` |
+| State Management      | `@reduxjs/toolkit` (including RTK Query), `react-redux`, `redux-persist`, `@react-native-async-storage/async-storage`                                 |
+| Styling               | `styled-components`                                                                                                                                   |
+| Animation             | `react-native-reanimated`, `react-native-worklets`                                                                                                    |
+| Graphics / SVG        | `react-native-svg`, `react-native-svg-transformer`                                                                                                    |
+| Layout Utilities      | `react-native-safe-area-context`                                                                                                                      |
+| Environment Variables | `react-native-dotenv`                                                                                                                                 |
+| Testing               | `jest`, `react-test-renderer`, `@react-native/jest-preset`                                                                                            |
+| Code Quality          | `eslint`, `prettier`, `@typescript-eslint`                                                                                                            |
 
-## Proje Yapısı
+## Project Structure
 
-```
+```text
 src/
-  assets/        # Fontlar, görseller, SVG ikonlar
+  assets/        # Fonts, images, and SVG icons
   components/    # Button, Image, PremiumCard, Screen, SearchInput, Text
   navigation/    # RootNavigator, OnboardingNavigator, MainNavigator (bottom tabs)
   screens/
-    Onboarding/  # Onboarding carousel, sayfaları ve alt bileşenleri
-    Welcome/     # Karşılama ekranı
+    Onboarding/  # Onboarding carousel, pages, and sub-components
+    Welcome/     # Welcome screen
     app/         # Home, Diagnose, BarcodeScanning, MyGarden, Profile
-  store/         # Redux store, onboardingSlice
-  theme/         # Renkler ve responsive boyutlandırma (normalizeSize)
-android/         # Native Android projesi
-ios/             # Native iOS projesi (CocoaPods)
+  store/         # Redux store and onboardingSlice
+  theme/         # Colors and responsive sizing (normalizeSize)
+android/         # Native Android project
+ios/             # Native iOS project (CocoaPods)
 ```
 
-## Kurulum
+## Installation
 
-> **Not**: Başlamadan önce [React Native ortam kurulumu](https://reactnative.dev/docs/set-up-your-environment) rehberini tamamladığınızdan emin olun.
+> **Note**: Before getting started, make sure you have completed the [React Native environment setup](https://reactnative.dev/docs/set-up-your-environment) guide.
 
 ```sh
 npm install
 ```
 
-iOS için CocoaPods bağımlılıklarının kurulması gerekir (ilk kurulumda veya native bağımlılık güncellemelerinde çalıştırın):
+For iOS, CocoaPods dependencies need to be installed (run this during the initial setup or after native dependency updates):
 
 ```sh
 bundle install
 bundle exec pod install
 ```
 
-## Ortam Değişkenleri
+## Environment Variables
 
-Proje, `react-native-dotenv` ile `.env` dosyasından `BASE_URL` değişkenini okur (`@env` modülü üzerinden). Proje kök dizininde bir `.env` dosyası oluşturup API taban adresini tanımlayın:
+The project uses `react-native-dotenv` to read the `BASE_URL` variable from the `.env` file through the `@env` module.
 
-```
+Create a `.env` file in the project root and define the API base URL:
+
+```env
 BASE_URL=https://api.example.com
 ```
 
-## Çalıştırma
+## Running the App
 
-Metro geliştirme sunucusunu başlatın:
+Start the Metro development server:
 
 ```sh
 npm start
 ```
 
-Ardından ayrı bir terminalde uygulamayı derleyip çalıştırın:
+Then, in a separate terminal, build and run the application:
 
 ```sh
 npm run android
-# veya
+# or
 npm run ios
 ```
 
-## NPM Script'leri
+## NPM Scripts
 
-| Script                    | Açıklama                                             |
-| ------------------------- | ---------------------------------------------------- |
-| `npm start`               | Metro bundler'ı başlatır                             |
-| `npm run android`         | Android üzerinde uygulamayı derleyip çalıştırır      |
-| `npm run ios`             | iOS üzerinde uygulamayı derleyip çalıştırır          |
-| `npm test`                | Tüm Jest test paketlerini çalıştırır                 |
-| `npm run test:components` | Sadece `src/components` test paketini çalıştırır     |
-| `npm run test:screens`    | Sadece `src/screens` test paketini çalıştırır        |
-| `npm run lint`            | ESLint ile statik analiz yapar                       |
-| `npm run lint:fix`        | ESLint hatalarını otomatik düzeltir                  |
-| `npm run format`          | Prettier ile tüm dosyaları biçimlendirir             |
-| `npm run format:check`    | Prettier biçimlendirme kontrolü yapar (yazma yapmaz) |
+| Script                    | Description                                        |
+| ------------------------- | -------------------------------------------------- |
+| `npm start`               | Starts the Metro bundler                           |
+| `npm run android`         | Builds and runs the app on Android                 |
+| `npm run ios`             | Builds and runs the app on iOS                     |
+| `npm test`                | Runs all Jest test suites                          |
+| `npm run test:components` | Runs only the `src/components` test suite          |
+| `npm run test:screens`    | Runs only the `src/screens` test suite             |
+| `npm run lint`            | Runs static analysis with ESLint                   |
+| `npm run lint:fix`        | Automatically fixes ESLint issues                  |
+| `npm run format`          | Formats all files using Prettier                   |
+| `npm run format:check`    | Checks Prettier formatting without modifying files |
 
-## Test
+## Testing
 
-Testler Jest ve `react-test-renderer` ile yazılmıştır:
+Tests are written using Jest and `react-test-renderer`:
 
-- `__tests__/App.test.tsx`: Uygulamanın kök bileşeninin hatasız render edildiğini doğrular.
-- `src/components/components.test.tsx`: Ortak bileşenlerin render ve etkileşim davranışlarını test eder.
-- `src/screens/screens.test.tsx`: Ekranların render, navigasyon ve temel etkileşimlerini test eder.
+* `__tests__/App.test.tsx`: Verifies that the root application component renders without errors.
+* `src/components/components.test.tsx`: Tests rendering and interaction behavior of shared components.
+* `src/screens/screens.test.tsx`: Tests screen rendering, navigation, and basic interactions.
 
 ```sh
 npm test
 ```
 
-## Kod Kalitesi
+## Code Quality
 
-Kod stili ESLint (`@react-native/eslint-config`, `@typescript-eslint`) ve Prettier ile denetlenir:
+Code style is maintained and checked using ESLint (`@react-native/eslint-config`, `@typescript-eslint`) and Prettier:
 
 ```sh
 npm run lint
