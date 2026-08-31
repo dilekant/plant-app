@@ -5,7 +5,7 @@ import { useTheme } from 'styled-components/native';
 import { useGetCategoriesQuery } from './actions/getCategories';
 import { useGetQuestionsQuery } from './actions/getQuestions';
 import { CategoriesCard, QuestionsCard } from './components';
-import { ContentContainer, HeaderContainer, TextContainer } from './styles';
+import { CardContainer, ContentContainer, HeaderContainer, TextContainer } from './styles';
 
 import images from '@/assets/images';
 import { Image, PremiumCard, Screen, SearchInput, Text } from '@/components';
@@ -50,29 +50,37 @@ const Home = () => {
       </HeaderContainer>
 
       <ContentContainer>
-        <PremiumCard />
-        <Text
-          color={colors.primaryText}
-          style={{ marginTop: normalizeSize(24) }}
-          variant="bodyMedium"
-        >
-          Get Started
-        </Text>
+        <CardContainer>
+          <PremiumCard />
+          <Text
+            color={colors.primaryText}
+            style={{ marginTop: normalizeSize(24) }}
+            variant="bodyMedium"
+          >
+            Get Started
+          </Text>
+        </CardContainer>
         <FlatList
           horizontal
           data={questions}
           keyExtractor={(_, index) => index.toString()}
           renderItem={({ item }) => <QuestionsCard question={item} />}
           showsHorizontalScrollIndicator={false}
-          style={{ marginTop: normalizeSize(16), marginBottom: normalizeSize(24) }}
+          style={{
+            marginTop: normalizeSize(16),
+            marginBottom: normalizeSize(24),
+            paddingLeft: normalizeSize(24),
+          }}
         />
-        <FlatList
-          data={categories?.data ?? []}
-          keyExtractor={(_, index) => index.toString()}
-          numColumns={2}
-          renderItem={({ item }) => <CategoriesCard category={item} />}
-          showsVerticalScrollIndicator={false}
-        />
+        <CardContainer>
+          <FlatList
+            data={categories?.data ?? []}
+            keyExtractor={(_, index) => index.toString()}
+            numColumns={2}
+            renderItem={({ item }) => <CategoriesCard category={item} />}
+            showsVerticalScrollIndicator={false}
+          />
+        </CardContainer>
       </ContentContainer>
     </Screen>
   );

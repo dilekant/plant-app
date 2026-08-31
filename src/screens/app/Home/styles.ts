@@ -18,6 +18,11 @@ export const TextContainer = styled.View`
 export const ContentContainer = styled.View`
   ${({ theme: { normalizeSize } }) => ({
     marginVertical: normalizeSize(24),
+  })}
+`;
+
+export const CardContainer = styled.View`
+  ${({ theme: { normalizeSize } }) => ({
     paddingHorizontal: normalizeSize(24),
   })}
 `;
