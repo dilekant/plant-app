@@ -1,97 +1,134 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# PlantApp
 
-# Getting Started
+Bitki bakımı ve tanıma odaklı, React Native (New Architecture) ile geliştirilen mobil uygulama. Kullanıcıyı onboarding/paywall akışından geçirip, ana sekmeler üzerinden bitki bakım içeriklerine yönlendirir.
 
-> **Note**: Make sure you have completed the [Set Up Your Environment](https://reactnative.dev/docs/set-up-your-environment) guide before proceeding.
+## İçindekiler
 
-## Step 1: Start Metro
+- [Özellikler](#özellikler)
+- [Teknoloji Yığını](#teknoloji-yığını)
+- [Proje Yapısı](#proje-yapısı)
+- [Kurulum](#kurulum)
+- [Ortam Değişkenleri](#ortam-değişkenleri)
+- [Çalıştırma](#çalıştırma)
+- [NPM Script'leri](#npm-scriptleri)
+- [Test](#test)
+- [Kod Kalitesi](#kod-kalitesi)
 
-First, you will need to run **Metro**, the JavaScript build tool for React Native.
+## Özellikler
 
-To start the Metro dev server, run the following command from the root of your React Native project:
+- **Onboarding akışı**: Yatay `FlatList` tabanlı, sayfalanabilir bir carousel (`OnboardingPageOne`, `OnboardingPageTwo`, `PaywallPage`) ile kullanıcıyı tanıtım ekranlarından geçirir; sayfa göstergesi (`PaginationDots`) ve kaydırma konumuna bağlı, `react-native-reanimated` ile animasyonlu arka plan/footer geçişi içerir.
+- **Paywall ekranı**: Özellik kartları (`PaywallFeatureCard`), abonelik planı seçimi (`PaywallPlanOption`) ve yasal metin footer'ı (`PaywallFooter`) içeren premium satış ekranı.
+- **Welcome ekranı**: Uygulamaya giriş ekranı, onboarding akışına yönlendirme.
+- **Ana sekmeler (Bottom Tabs)**: `Home`, `Diagnose`, `BarcodeScanning`, `MyGarden`, `Profile` sekmeleri arasında gezinme.
+- **Home ekranı**: RTK Query ile uzak API'den sorular (`getQuestions`) ve kategoriler (`getCategories`) çekilir; arama kutusu, premium kartı, yatay soru listesi ve iki kolonlu kategori listesi gösterilir.
+- **Diagnose, BarcodeScanning, MyGarden, Profile**: Navigasyon iskeleti hazır, içerikleri henüz geliştirilmemiş placeholder ekranlar.
+- **Kalıcı durum**: Onboarding'in tamamlanma durumu `redux-persist` ve `AsyncStorage` ile cihazda saklanır; uygulama açılışında kaldığı yerden devam eder.
+- **Ortak bileşen kütüphanesi**: `Button`, `Image`, `PremiumCard`, `Screen`, `SearchInput`, `Text` gibi tema destekli, tekrar kullanılabilir bileşenler.
+- **Tema sistemi**: `styled-components` üzerinden merkezi renk paleti ve ekran genişliğine göre ölçeklenen (`normalizeSize`) responsive boyutlandırma.
 
-```sh
-# Using npm
-npm start
+## Teknoloji Yığını
 
-# OR using Yarn
-yarn start
+| Kategori            | Teknoloji                                                                                                                                             |
+| ------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Çekirdek            | React 19.2.3, React Native 0.87.1, TypeScript                                                                                                         |
+| Navigasyon          | `@react-navigation/native`, `@react-navigation/native-stack`, `@react-navigation/bottom-tabs`, `react-native-screens`, `react-native-gesture-handler` |
+| State yönetimi      | `@reduxjs/toolkit` (RTK Query dahil), `react-redux`, `redux-persist`, `@react-native-async-storage/async-storage`                                     |
+| Stil                | `styled-components`                                                                                                                                   |
+| Animasyon           | `react-native-reanimated`, `react-native-worklets`                                                                                                    |
+| Grafik / SVG        | `react-native-svg`, `react-native-svg-transformer`                                                                                                    |
+| Layout yardımcıları | `react-native-safe-area-context`                                                                                                                      |
+| Ortam değişkenleri  | `react-native-dotenv`                                                                                                                                 |
+| Test                | `jest`, `react-test-renderer`, `@react-native/jest-preset`                                                                                            |
+| Kod kalitesi        | `eslint`, `prettier`, `@typescript-eslint`                                                                                                            |
+
+## Proje Yapısı
+
+```
+src/
+  assets/        # Fontlar, görseller, SVG ikonlar
+  components/    # Button, Image, PremiumCard, Screen, SearchInput, Text
+  navigation/    # RootNavigator, OnboardingNavigator, MainNavigator (bottom tabs)
+  screens/
+    Onboarding/  # Onboarding carousel, sayfaları ve alt bileşenleri
+    Welcome/     # Karşılama ekranı
+    app/         # Home, Diagnose, BarcodeScanning, MyGarden, Profile
+  store/         # Redux store, onboardingSlice
+  theme/         # Renkler ve responsive boyutlandırma (normalizeSize)
+android/         # Native Android projesi
+ios/             # Native iOS projesi (CocoaPods)
 ```
 
-## Step 2: Build and run your app
+## Kurulum
 
-With Metro running, open a new terminal window/pane from the root of your React Native project, and use one of the following commands to build and run your Android or iOS app:
-
-### Android
+> **Not**: Başlamadan önce [React Native ortam kurulumu](https://reactnative.dev/docs/set-up-your-environment) rehberini tamamladığınızdan emin olun.
 
 ```sh
-# Using npm
-npm run android
-
-# OR using Yarn
-yarn android
+npm install
 ```
 
-### iOS
-
-For iOS, remember to install CocoaPods dependencies (this only needs to be run on first clone or after updating native deps).
-
-The first time you create a new project, run the Ruby bundler to install CocoaPods itself:
+iOS için CocoaPods bağımlılıklarının kurulması gerekir (ilk kurulumda veya native bağımlılık güncellemelerinde çalıştırın):
 
 ```sh
 bundle install
-```
-
-Then, and every time you update your native dependencies, run:
-
-```sh
 bundle exec pod install
 ```
 
-For more information, please visit [CocoaPods Getting Started guide](https://guides.cocoapods.org/using/getting-started.html).
+## Ortam Değişkenleri
 
-```sh
-# Using npm
-npm run ios
+Proje, `react-native-dotenv` ile `.env` dosyasından `BASE_URL` değişkenini okur (`@env` modülü üzerinden). Proje kök dizininde bir `.env` dosyası oluşturup API taban adresini tanımlayın:
 
-# OR using Yarn
-yarn ios
+```
+BASE_URL=https://api.example.com
 ```
 
-If everything is set up correctly, you should see your new app running in the Android Emulator, iOS Simulator, or your connected device.
+## Çalıştırma
 
-This is one way to run your app — you can also build it directly from Android Studio or Xcode.
+Metro geliştirme sunucusunu başlatın:
 
-## Step 3: Modify your app
+```sh
+npm start
+```
 
-Now that you have successfully run the app, let's make changes!
+Ardından ayrı bir terminalde uygulamayı derleyip çalıştırın:
 
-Open `App.tsx` in your text editor of choice and make some changes. When you save, your app will automatically update and reflect these changes — this is powered by [Fast Refresh](https://reactnative.dev/docs/fast-refresh).
+```sh
+npm run android
+# veya
+npm run ios
+```
 
-When you want to forcefully reload, for example to reset the state of your app, you can perform a full reload:
+## NPM Script'leri
 
-- **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Dev Menu**, accessed via <kbd>Ctrl</kbd> + <kbd>M</kbd> (Windows/Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (macOS).
-- **iOS**: Press <kbd>R</kbd> in iOS Simulator.
+| Script                    | Açıklama                                             |
+| ------------------------- | ---------------------------------------------------- |
+| `npm start`               | Metro bundler'ı başlatır                             |
+| `npm run android`         | Android üzerinde uygulamayı derleyip çalıştırır      |
+| `npm run ios`             | iOS üzerinde uygulamayı derleyip çalıştırır          |
+| `npm test`                | Tüm Jest test paketlerini çalıştırır                 |
+| `npm run test:components` | Sadece `src/components` test paketini çalıştırır     |
+| `npm run test:screens`    | Sadece `src/screens` test paketini çalıştırır        |
+| `npm run lint`            | ESLint ile statik analiz yapar                       |
+| `npm run lint:fix`        | ESLint hatalarını otomatik düzeltir                  |
+| `npm run format`          | Prettier ile tüm dosyaları biçimlendirir             |
+| `npm run format:check`    | Prettier biçimlendirme kontrolü yapar (yazma yapmaz) |
 
-## Congratulations! :tada:
+## Test
 
-You've successfully run and modified your React Native App. :partying_face:
+Testler Jest ve `react-test-renderer` ile yazılmıştır:
 
-### Now what?
+- `__tests__/App.test.tsx`: Uygulamanın kök bileşeninin hatasız render edildiğini doğrular.
+- `src/components/components.test.tsx`: Ortak bileşenlerin render ve etkileşim davranışlarını test eder.
+- `src/screens/screens.test.tsx`: Ekranların render, navigasyon ve temel etkileşimlerini test eder.
 
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [docs](https://reactnative.dev/docs/getting-started).
+```sh
+npm test
+```
 
-# Troubleshooting
+## Kod Kalitesi
 
-If you're having issues getting the above steps to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
+Kod stili ESLint (`@react-native/eslint-config`, `@typescript-eslint`) ve Prettier ile denetlenir:
 
-# Learn More
-
-To learn more about React Native, take a look at the following resources:
-
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+```sh
+npm run lint
+npm run format:check
+```
