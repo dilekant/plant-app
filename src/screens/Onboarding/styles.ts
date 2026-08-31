@@ -42,7 +42,6 @@ export const FeaturesContentContainer = styled.View`
     padding: normalizeSize(16),
     width: normalizeSize(156),
     height: normalizeSize(130),
-    // backgroundColor: 'blue',
     justifyContent: 'space-between',
     backgroundColor: colors.blur,
   })}

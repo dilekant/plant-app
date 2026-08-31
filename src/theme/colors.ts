@@ -19,17 +19,4 @@ export const colors = {
   whiteOpacity88: 'rgba(255, 255, 255, 0.88)',
   inactive: '#BDBDBD',
   yellow: '#E5C990',
-
-  surface: '#fff',
-  blue: '#121314',
-  orange: '#FF9800',
-  purple: '#9C27B0',
-  blueText: '#1565c0',
-  orangeText: '#e65100',
-  purpleText: '#6a1b9a',
-  text: '#333',
-  secondaryText: '#666',
-  mutedLight: 'rgba(255, 255, 255, 0.8)',
-  border: '#e0e0e0',
-  black: '#000',
 } as const;
